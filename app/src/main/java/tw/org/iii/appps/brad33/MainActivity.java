@@ -120,12 +120,24 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public View getChildView(int i, int j, boolean b, View view, ViewGroup viewGroup) {
             LayoutInflater inflater = getLayoutInflater();
-            View childView = inflater.inflate(R.layout.item_child,viewGroup,false);
+            View childView = null;
+//            View childView = inflater.inflate(R.layout.item_child,viewGroup,false);
 
-            TextView title = (TextView) childView.findViewById(R.id.child_title);
+//            TextView title = (TextView) childView.findViewById(R.id.child_title);
             if (i==0){
-                title.setText(items1.get(j).get("title"));
+                if (j % 5 == 0){
+                    childView = inflater.inflate(R.layout.item_childx, viewGroup, false);
+                    TextView title = (TextView) childView.findViewById(R.id.childx_title);
+                    title.setText(items1.get(j).get("title"));
+                }else {
+                    childView = inflater.inflate(R.layout.item_child, viewGroup, false);
+                    TextView title = (TextView) childView.findViewById(R.id.child_title);
+                    title.setText(items1.get(j).get("title"));
+                }
             }else{
+                childView = inflater.inflate(R.layout.item_child2,viewGroup,false);
+
+                TextView title = (TextView) childView.findViewById(R.id.child2_title);
                 title.setText(items2.get(j).get("title"));
             }
             return childView;
